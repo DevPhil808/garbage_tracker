@@ -1,0 +1,265 @@
+:root {
+  --primary-green: #22c55e;
+  --primary-green-dark: #16a34a;
+  --text-main: #111827;
+  --text-muted: #6b7280;
+  --bg-outer: #ffffff;
+  --bg-page: #ffffff;
+  --bg-card: #ffffff;
+  --shadow-soft: 0 24px 50px rgba(15, 23, 42, 0.08);
+  --radius-xl: 0;
+  --radius-lg: 24px;
+  --radius-md: 16px;
+  --radius-pill: 999px;
+}
+
+.supervisor-dashboard-page {
+  min-height: 100vh;
+  background-color: var(--bg-outer);
+}
+
+.sd-shell {
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--bg-page);
+  border-radius: 0;
+  box-shadow: none;
+  display: flex;
+  flex-direction: column;
+}
+
+
+.sd-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 28px;
+  background-color: var(--bg-card);
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.sd-header-left {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.sd-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sd-logo-img {
+  width: auto;
+  height: 24px;
+  object-fit: contain;
+}
+
+.sd-logo-text {
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.sd-org-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sd-org-label {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+.sd-org-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.sd-header-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.sd-icon-button {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sd-bell-icon {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+
+.sd-header-text {
+  font-size: 0.85rem;
+  color: var(--text-main);
+}
+
+.sd-main {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  align-items: flex-start;
+}
+
+
+.sd-sidebar {
+  background-color: #f9fafb;
+  border-right: 1px solid #e5e7eb;
+  padding: 20px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sd-nav-item {
+  border-radius: 999px;
+  border: none;
+  padding: 8px 14px;
+  text-align: left;
+  font-size: 0.85rem;
+  cursor: pointer;
+  background-color: #e5e7eb;
+  color: var(--text-main);
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.sd-nav-item--active {
+  background-color: var(--primary-green);
+  color: #ffffff;
+}
+
+
+.sd-content {
+  padding: 24px 28px 28px;
+}
+
+
+
+.sd-stat-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  margin-bottom: 28px;
+}
+
+.sd-stat-row--tasks {
+  margin-bottom: 28px;
+}
+
+.sd-stat-card {
+  background-color: var(--bg-card);
+  border-radius: var(--radius-md);
+  padding: 18px 18px 14px;
+  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.06);
+}
+
+.sd-stat-value {
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+.sd-stat-label {
+  font-size: 0.9rem;
+  margin-top: 4px;
+  margin-bottom: 8px;
+}
+
+.sd-stat-trend {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.75rem;
+}
+
+.sd-trend-arrow,
+.sd-trend-value {
+  color: var(--primary-green-dark);
+  font-weight: 600;
+}
+
+.sd-trend-text {
+  color: var(--text-muted);
+}
+
+
+
+.sd-section-heading {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 12px;
+}
+
+
+
+.sd-activity-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 0.85rem;
+}
+
+.sd-activity-list li + li {
+  margin-top: 4px;
+}
+
+/* responsiveness */
+
+@media (max-width: 960px) {
+  .sd-main {
+    grid-template-columns: 1fr;
+  }
+
+  .sd-sidebar {
+    border-right: none;
+    border-bottom: 1px solid #e5e7eb;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .sd-nav-item {
+    flex: 1 1 auto;
+    text-align: center;
+  }
+
+  .sd-content {
+    padding: 20px 18px 24px;
+  }
+
+  .sd-stat-row {
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .supervisor-dashboard-page {
+    padding: 0;
+  }
+
+  .sd-shell {
+    border-radius: 0;
+  }
+
+  .sd-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .sd-header-right {
+    flex-wrap: wrap;
+  }
+
+  .sd-stat-row {
+    grid-template-columns: 1fr;
+  }
+}

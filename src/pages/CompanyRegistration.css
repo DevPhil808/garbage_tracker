@@ -1,0 +1,284 @@
+:root {
+  --primary-green: #22c55e;
+  --primary-green-dark: #16a34a;
+  --text-main: #111827;
+  --text-muted: #6b7280;
+  --bg-outer: #ffffff;
+  --bg-page: #ffffff;
+  --bg-card: #ffffff;
+  --radius-xl: 32px;
+  --radius-lg: 24px;
+  --radius-pill: 999px;
+  --shadow-soft: 0 24px 50px rgba(15, 23, 42, 0.08);
+}
+
+.company-registration-page {
+  min-height: 100vh;
+  width: 100%;
+  background-color: var(--bg-outer);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 32px 16px;
+  box-sizing: border-box;
+}
+
+.company-registration-card {
+  width: 100%;
+  max-width: 960px;
+  background-color: var(--bg-page);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-soft);
+  border: 1px solid #e5e7eb;
+  padding: 32px 40px 32px;
+}
+
+/* TOP */
+
+.cr-top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.cr-line {
+  flex: 1;
+  height: 1px;
+  background-color: #e5e7eb;
+}
+
+.cr-logo-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cr-logo {
+  height: 24px;
+  width: auto;
+  object-fit: contain;
+}
+
+.cr-logo-text {
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.cr-title {
+  text-align: center;
+  font-size: 1.4rem;
+  margin: 0 0 24px;
+}
+
+/* FORM */
+
+.cr-form {
+  border-radius: var(--radius-lg);
+}
+
+.cr-section-title {
+  font-size: 0.95rem;
+  margin: 0 0 16px;
+}
+
+.cr-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 48px;
+  row-gap: 16px;
+  align-items: flex-start;
+}
+
+.cr-column {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.cr-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cr-field label {
+  font-size: 0.85rem;
+  color: var(--text-main);
+}
+
+/* shorter input width */
+
+.cr-field input[type="text"],
+.cr-field input[type="email"],
+.cr-field input[type="tel"],
+.cr-field input[type="date"] {
+  border-radius: 999px;
+  border: 1px solid #e5e7eb;
+  padding: 10px 14px;
+  background-color: #f3f4f6;
+  font-size: 0.9rem;
+  outline: none;
+  width: 100%;
+  max-width: 360px;
+}
+
+.cr-field input[type="text"]:focus,
+.cr-field input[type="email"]:focus,
+.cr-field input[type="tel"]:focus,
+.cr-field input[type="date"]:focus {
+  border-color: var(--primary-green);
+  background-color: #ffffff;
+}
+
+.cr-field-full {
+  margin-top: 8px;
+}
+
+/* File input */
+
+.cr-file-input {
+  border-radius: 999px;
+  border: 1px dashed #d4d4d8;
+  padding: 9px 14px;
+  background-color: #f3f4f6;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  width: 100%;
+  max-width: 360px;
+}
+
+/* Select */
+
+.cr-select {
+  border-radius: 999px;
+  border: 1px solid #e5e7eb;
+  padding: 10px 14px;
+  background-color: #f3f4f6;
+  font-size: 0.9rem;
+  outline: none;
+  appearance: none;
+  width: 100%;
+  max-width: 360px;
+}
+
+.cr-select:focus {
+  border-color: var(--primary-green);
+  background-color: #ffffff;
+}
+
+/* Working days checkboxes */
+
+.cr-days-checkboxes {
+  margin-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+}
+
+.cr-day-option {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  color: var(--text-main);
+}
+
+.cr-day-option input[type="checkbox"] {
+  accent-color: var(--primary-green);
+}
+
+/* Time range */
+
+.cr-time-range {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  max-width: 360px;
+}
+
+.cr-time-range input[type="time"] {
+  flex: 1;
+  border-radius: 999px;
+  border: 1px solid #e5e7eb;
+  padding: 8px 10px;
+  background-color: #f3f4f6;
+  font-size: 0.9rem;
+  outline: none;
+}
+
+.cr-time-range input[type="time"]:focus {
+  border-color: var(--primary-green);
+  background-color: #ffffff;
+}
+
+.cr-time-separator {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* ACTIONS */
+
+.cr-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 24px;
+}
+
+.cr-continue-btn {
+  border: none;
+  border-radius: var(--radius-pill);
+  padding: 10px 30px;
+  background-color: var(--primary-green);
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 12px 24px rgba(22, 163, 74, 0.35);
+  transition: background 0.15s ease, transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.cr-continue-btn:hover {
+  background-color: var(--primary-green-dark);
+  transform: translateY(-1px);
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 900px) {
+  .company-registration-card {
+    padding: 24px 24px 28px;
+  }
+
+  .cr-grid {
+    grid-template-columns: 1fr;
+    column-gap: 0;
+  }
+
+  .cr-actions {
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 640px) {
+  .company-registration-page {
+    padding: 16px 8px;
+  }
+
+  .company-registration-card {
+    border-radius: 20px;
+  }
+
+  .cr-title {
+    font-size: 1.2rem;
+  }
+
+  .cr-continue-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
