@@ -19,6 +19,7 @@ const LandingPage: React.FC = () => {
   return (
     <div className="landing-page">
       <div className="landing-page-shell">
+        {/* Header */}
         <header className="lp-header">
           <nav className="lp-nav">
             <div
@@ -31,14 +32,12 @@ const LandingPage: React.FC = () => {
                 alt="Borla Tracker logo"
                 className="lp-logo-img"
               />
-              <span className="lp-logo-text"></span>
             </div>
 
             <div className="lp-nav-right">
               <button type="button" className="lp-nav-cta" onClick={goToLogin}>
                 Log In
               </button>
-
               <button
                 type="button"
                 className="lp-nav-cta"
@@ -65,7 +64,6 @@ const LandingPage: React.FC = () => {
                 >
                   Register Company
                 </button>
-
                 <button
                   type="button"
                   className="lp-hero-cta"
@@ -87,6 +85,7 @@ const LandingPage: React.FC = () => {
           </section>
         </header>
 
+        {/* Main */}
         <main>
           <section className="lp-feature-section">
             <div className="lp-feature-card">
@@ -143,7 +142,6 @@ const LandingPage: React.FC = () => {
             <div className="lp-capabilities-grid">
               <div className="lp-capability-card">
                 <div className="lp-capability-icon">
-                  {/* ❌ placeholder for missing company registration icon */}
                   <img
                     src=""
                     alt="Company registration and verification"
@@ -161,7 +159,6 @@ const LandingPage: React.FC = () => {
 
               <div className="lp-capability-card">
                 <div className="lp-capability-icon">
-                  {/* ❌ placeholder for missing task assignment icon */}
                   <img
                     src=""
                     alt="Task assignment engine"
@@ -177,7 +174,6 @@ const LandingPage: React.FC = () => {
 
               <div className="lp-capability-card">
                 <div className="lp-capability-icon">
-                  {/* ❌ placeholder for missing complaint management icon */}
                   <img
                     src=""
                     alt="Complaint management"
@@ -194,30 +190,68 @@ const LandingPage: React.FC = () => {
           </section>
         </main>
 
-        {/* ✅ Footer Section */}
+        {/* Footer */}
         <footer className="lp-footer">
-          <div className="lp-footer-content">
-            <div className="lp-footer-left">
-              <img
-                src={logoSrc}
-                alt="Borla Tracker logo"
-                className="lp-footer-logo"
-              />
-              <span className="lp-footer-text">
-                © {new Date().getFullYear()} Borla Tracker. All rights reserved.
-              </span>
+          <div className="lp-footer-grid">
+            <div className="lp-footer-column">
+              <h4 className="lp-footer-heading">Product</h4>
+              <ul className="lp-footer-list">
+                <li>Employee database</li>
+                <li>Payroll</li>
+                <li>Absencies</li>
+                <li>Time tracking</li>
+                <li>Shift planner</li>
+                <li>Recruiting</li>
+              </ul>
             </div>
-            <div className="lp-footer-right">
-              <a href="/about" className="lp-footer-link">
-                About
-              </a>
-              <a href="/contact" className="lp-footer-link">
-                Contact
-              </a>
-              <a href="/privacy" className="lp-footer-link">
-                Privacy Policy
-              </a>
+
+            <div className="lp-footer-column">
+              <h4 className="lp-footer-heading">Information</h4>
+              <ul className="lp-footer-list">
+                <li>FAQ</li>
+                <li>Blog</li>
+                <li>Support</li>
+              </ul>
             </div>
+
+            <div className="lp-footer-column">
+              <h4 className="lp-footer-heading">Company</h4>
+              <ul className="lp-footer-list">
+                <li>About us</li>
+                <li>Careers</li>
+                <li>Contact us</li>
+                <li>Borla Tracker</li>
+              </ul>
+            </div>
+
+            <div className="lp-footer-column">
+              <h4 className="lp-footer-heading">Subscribe</h4>
+              <form className="lp-footer-subscribe">
+                <input
+                  type="email"
+                  placeholder="Email address"
+                  className="lp-footer-input"
+                />
+                <button type="submit" className="lp-footer-button">
+                  Subscribe
+                </button>
+              </form>
+              <p className="lp-footer-description">
+                Hello, we are Borla Tracker. Our goal is to revolutionize how
+                waste companies engage with their clients and teams.
+              </p>
+            </div>
+          </div>
+
+          <div className="lp-footer-bottom">
+            <img
+              src={logoSrc}
+              alt="Borla Tracker logo"
+              className="lp-footer-logo"
+            />
+            <span className="lp-footer-text">
+              © {new Date().getFullYear()} Borla Tracker. All rights reserved.
+            </span>
           </div>
         </footer>
       </div>

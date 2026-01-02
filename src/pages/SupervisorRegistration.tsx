@@ -2,11 +2,10 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./SupervisorRegistration.css";
 
-// ✅ API endpoint
 const SUPERVISOR_CREATE_URL =
   "https://postumbonal-monatomic-cecelia.ngrok-free.dev/api/supervisor/create/";
 
-import defaultAvatar from "../assets/logo1.png";
+import logoSrc from "../assets/logo1.png";
 
 const SupervisorRegistration: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -59,7 +58,7 @@ const SupervisorRegistration: React.FC = () => {
             ? parseInt(formData.team_size, 10)
             : undefined,
           // ✅ Use provided photo_url or fallback to default avatar
-          photo_url: formData.photo_url || defaultAvatar,
+          photo_url: formData.photo_url || logoSrc,
         }),
       });
 
@@ -151,10 +150,9 @@ const SupervisorRegistration: React.FC = () => {
           onChange={handleChange}
         />
 
-        {/* ✅ Show preview of photo or default avatar */}
         <div className="registration-photo-preview">
           <img
-            src={formData.photo_url || defaultAvatar}
+            src={formData.photo_url || logoSrc}
             alt="Supervisor preview"
             className="registration-photo-img"
           />
