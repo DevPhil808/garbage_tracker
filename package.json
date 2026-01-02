@@ -3,13 +3,13 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://DevPhil808.github.io/garbage_tracker",
+  "homepage": "https://devphil808.github.io/garbage_tracker",
   "scripts": {
     "dev": "vite",
-    "deploy": "gh-pages -d build",
     "build": "tsc -b && vite build",
+    "preview": "vite preview",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "axios": "^1.13.2",

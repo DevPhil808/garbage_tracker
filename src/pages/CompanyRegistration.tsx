@@ -2,6 +2,9 @@ import React, { type FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./CompanyRegistration.css";
 
+const COMPANY_API_URL =
+  "https://postumbonal-monatomic-cecelia.ngrok-free.dev/api/company/register/";
+
 const logoSrc = "/public/images/logo1.png";
 
 const DAYS_OF_WEEK = [
@@ -26,6 +29,17 @@ const CompanyRegistration: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  // New state for required fields
+  const [companyName, setCompanyName] = useState("");
+  const [logoUrl, setLogoUrl] = useState("");
+  const [companyPhone, setCompanyPhone] = useState("");
+  const [password, setPassword] = useState("");
+  const [gstNumber, setGstNumber] = useState("");
+  const [complaintResolutionSla, setComplaintResolutionSla] = useState("");
+  const [companyEmail, setCompanyEmail] = useState("");
+  const [companyAddress, setCompanyAddress] = useState("");
+  const [operationalCities, setOperationalCities] = useState<string>("");
+
   const handleWorkingPatternChange = (
     e: React.ChangeEvent<HTMLSelectElement>
   ) => {
@@ -43,19 +57,16 @@ const CompanyRegistration: React.FC = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const formEl = e.currentTarget;
-    const formData = new FormData(formEl);
-
-    const companyName = (formData.get("companyName") || "").toString().trim();
-    const logoUrl = (formData.get("logoUrl") || "").toString().trim();
-
+    // Validate required fields
     if (
       !companyName ||
       !logoUrl ||
+      !companyPhone ||
+      !password ||
+      !gstNumber ||
+      !complaintResolutionSla ||
       !workingTimeStart ||
-      !workingTimeEnd ||
-      !priceMin ||
-      !priceMax
+      !workingTimeEnd
     ) {
       setError("Please fill in all required fields.");
       return;
@@ -76,35 +87,61 @@ const CompanyRegistration: React.FC = () => {
     try {
       const payload = {
         company_name: companyName,
-        logo_url: logoUrl,
+        profile_photo: logoUrl,
+        phone_number: companyPhone,
+        password: password,
+        gst_number: gstNumber,
+        complaint_resolution_sla: parseInt(complaintResolutionSla, 10),
         working_days: workingDaysObject,
         opening_time: workingTimeStart,
         closing_time: workingTimeEnd,
+        // Optional fields
+        email: companyEmail,
+        address: companyAddress,
+        operational_cities: operationalCities
+          ? operationalCities.split(",").map((city) => city.trim())
+          : [],
         price_min: priceMin,
         price_max: priceMax,
       };
 
-      const response = await fetch(
-        "https://postumbonal-monatomic-cecelia.ngrok-free.dev/api/company/register/",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(payload),
-        }
-      );
+      const response = await fetch(COMPANY_API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await response.json();
 
       if (!response.ok) {
         let message = "Failed to create company";
-        try {
-          const data = await response.json();
-          if (data?.detail) message = data.detail;
-          if (data?.message) message = data.message;
-        } catch {}
-        throw new Error(message);
+        if (data?.detail) message = data.detail;
+        if (data?.message) message = data.message;
+        // Show first field error if available
+        if (typeof data === "object" && !message) {
+          const firstKey = Object.keys(data)[0];
+          if (firstKey) message = `${firstKey}: ${data[firstKey]}`;
+        }
+        setError(message);
+        return;
       }
 
+      // Store tokens if returned by backend
+      if (data.tokens && data.tokens.access && data.tokens.refresh) {
+        localStorage.setItem("access_token", data.tokens.access);
+        localStorage.setItem("refresh_token", data.tokens.refresh);
+      }
+      // Optionally store company/user info if returned
+      if (data.company) {
+        localStorage.setItem("company", JSON.stringify(data.company));
+      }
+      if (data.user) {
+        localStorage.setItem("user", JSON.stringify(data.user));
+      }
+
+      // Redirect to dashboard
       navigate("/supervisor/dashboard");
     } catch (err) {
       setError(
@@ -145,6 +182,8 @@ const CompanyRegistration: React.FC = () => {
                   id="companyName"
                   name="companyName"
                   type="text"
+                  value={companyName}
+                  onChange={(e) => setCompanyName(e.target.value)}
                   required
                 />
               </div>
@@ -156,16 +195,59 @@ const CompanyRegistration: React.FC = () => {
                   name="logoUrl"
                   type="text"
                   placeholder="https://example.com/logo.png"
+                  value={logoUrl}
+                  onChange={(e) => setLogoUrl(e.target.value)}
                   required
                 />
               </div>
 
               <div className="cr-field">
-                <label htmlFor="licenseNumber">License Number:</label>
+                <label htmlFor="companyPhone">Company Phone:</label>
                 <input
-                  id="licenseNumber"
-                  name="licenseNumber"
+                  id="companyPhone"
+                  name="companyPhone"
+                  type="tel"
+                  value={companyPhone}
+                  onChange={(e) => setCompanyPhone(e.target.value)}
+                  required
+                />
+              </div>
+
+              <div className="cr-field">
+                <label htmlFor="password">Password:</label>
+                <input
+                  id="password"
+                  name="password"
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+              </div>
+
+              <div className="cr-field">
+                <label htmlFor="gstNumber">GST Number:</label>
+                <input
+                  id="gstNumber"
+                  name="gstNumber"
                   type="text"
+                  value={gstNumber}
+                  onChange={(e) => setGstNumber(e.target.value)}
+                  required
+                />
+              </div>
+
+              <div className="cr-field">
+                <label htmlFor="complaintResolutionSla">
+                  Complaint Resolution SLA (hours):
+                </label>
+                <input
+                  id="complaintResolutionSla"
+                  name="complaintResolutionSla"
+                  type="number"
+                  min="1"
+                  value={complaintResolutionSla}
+                  onChange={(e) => setComplaintResolutionSla(e.target.value)}
                   required
                 />
               </div>
@@ -176,19 +258,8 @@ const CompanyRegistration: React.FC = () => {
                   id="companyEmail"
                   name="companyEmail"
                   type="email"
-                  required
-                />
-              </div>
-
-              <div className="cr-field">
-                <label htmlFor="businessCert">
-                  Business Registration Certificate:
-                </label>
-                <input
-                  id="businessCert"
-                  name="businessCert"
-                  type="file"
-                  className="cr-file-input"
+                  value={companyEmail}
+                  onChange={(e) => setCompanyEmail(e.target.value)}
                 />
               </div>
 
@@ -198,7 +269,22 @@ const CompanyRegistration: React.FC = () => {
                   id="companyAddress"
                   name="companyAddress"
                   type="text"
-                  required
+                  value={companyAddress}
+                  onChange={(e) => setCompanyAddress(e.target.value)}
+                />
+              </div>
+
+              <div className="cr-field cr-field-full">
+                <label htmlFor="operationalCities">
+                  Operational Cities (comma separated):
+                </label>
+                <input
+                  id="operationalCities"
+                  name="operationalCities"
+                  type="text"
+                  placeholder="Accra, Kumasi"
+                  value={operationalCities}
+                  onChange={(e) => setOperationalCities(e.target.value)}
                 />
               </div>
 
@@ -235,46 +321,6 @@ const CompanyRegistration: React.FC = () => {
 
             <div className="cr-column">
               <div className="cr-field">
-                <label htmlFor="registrationNumber">Registration Number:</label>
-                <input
-                  id="registrationNumber"
-                  name="registrationNumber"
-                  type="text"
-                  required
-                />
-              </div>
-
-              <div className="cr-field">
-                <label htmlFor="licenseExpiry">License Expiry Date:</label>
-                <input
-                  id="licenseExpiry"
-                  name="licenseExpiry"
-                  type="date"
-                  required
-                />
-              </div>
-
-              <div className="cr-field">
-                <label htmlFor="companyPhone">Company Phone:</label>
-                <input
-                  id="companyPhone"
-                  name="companyPhone"
-                  type="tel"
-                  required
-                />
-              </div>
-
-              <div className="cr-field">
-                <label htmlFor="wasteLicense">Waste Management License:</label>
-                <input
-                  id="wasteLicense"
-                  name="wasteLicense"
-                  type="file"
-                  className="cr-file-input"
-                />
-              </div>
-
-              <div className="cr-field">
                 <label>Working Time:</label>
                 <div className="cr-time-range">
                   <input
@@ -307,7 +353,6 @@ const CompanyRegistration: React.FC = () => {
                   step="0.01"
                   value={priceMin}
                   onChange={(e) => setPriceMin(e.target.value)}
-                  required
                 />
               </div>
 
@@ -321,7 +366,6 @@ const CompanyRegistration: React.FC = () => {
                   step="0.01"
                   value={priceMax}
                   onChange={(e) => setPriceMax(e.target.value)}
-                  required
                 />
               </div>
             </div>

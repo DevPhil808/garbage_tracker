@@ -1,0 +1,18 @@
+.company-profile-container {
+  max-width: 600px;
+  margin: 2rem auto;
+  background: #fff;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+.company-profile-logo {
+  display: block;
+  margin-bottom: 1rem;
+}
+.company-profile-loading,
+.company-profile-error {
+  text-align: center;
+  margin: 2rem;
+  color: #dc2626;
+}

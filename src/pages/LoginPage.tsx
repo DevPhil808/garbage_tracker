@@ -1,148 +1,105 @@
-import React, { type FormEvent, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./LoginPage.css";
+import { apiFetch } from "../services/apiClient"; // centralized API client
 
-const logoSrc = "/public/images/logo1.png";
+// ✅ API endpoint
+const LOGIN_API_URL =
+  "https://postumbonal-monatomic-cecelia.ngrok-free.dev/api/auth/login/";
 
-type Role = "supervisor" | "admin";
+// ✅ Import logo from src/assets
+import logoSrc from "../assets/logo1.png";
 
 const LoginPage: React.FC = () => {
-  const navigate = useNavigate();
-
-  const [role, setRole] = useState<Role>("supervisor");
-  const [phoneNumber, setPhoneNumber] = useState("");
+  const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate();
 
-  const handleSubmit = async (e: FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    setIsSubmitting(true);
     setError(null);
 
+    if (!identifier.trim() || !password.trim()) {
+      setError("Please enter your phone number/email and password.");
+      return;
+    }
+
+    setIsSubmitting(true);
+
     try {
-      const response = await fetch(
-        "https://postumbonal-monatomic-cecelia.ngrok-free.dev/api/auth/login/",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            phone_number: phoneNumber,
-            password,
-            role,
-          }),
-        }
-      );
+      const response = await apiFetch(LOGIN_API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ identifier: identifier.trim(), password }),
+      });
+
+      const data = await response.json();
 
       if (!response.ok) {
         let message = "Login failed";
-        try {
-          const data = await response.json();
-          if (data && typeof data.detail === "string") {
-            message = data.detail;
-          } else if (data && typeof data.message === "string") {
-            message = data.message;
-          }
-        } catch {}
-        throw new Error(message);
+        if (data?.detail) message = data.detail;
+        else if (data?.message) message = data.message;
+        setError(message);
+        return;
       }
 
-      if (role === "supervisor") {
+      // ✅ Save tokens and user info
+      localStorage.setItem("access_token", data.tokens.access);
+      localStorage.setItem("refresh_token", data.tokens.refresh);
+      localStorage.setItem("user", JSON.stringify(data.user));
+
+      if (data.company) {
+        localStorage.setItem("company", JSON.stringify(data.company));
+      }
+
+      // ✅ Navigate based on role
+      if (data.user.role === "supervisor" || data.user.role === "company") {
         navigate("/supervisor/dashboard");
       } else {
-        navigate("/admin/dashboard");
+        navigate("/");
       }
     } catch (err) {
-      const msg =
-        err instanceof Error ? err.message : "An unknown error occurred";
-      setError(msg);
-      console.error(err);
+      setError(
+        err instanceof Error ? err.message : "An unknown error occurred"
+      );
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  const goToHome = () => navigate("/");
-
   return (
     <div className="login-page">
       <div className="login-card">
-        <div
-          className="login-logo-wrapper"
-          onClick={goToHome}
-          style={{ cursor: "pointer" }}
-        >
+        <div className="login-logo-wrapper">
           <img src={logoSrc} alt="Borla Tracker logo" className="login-logo" />
           <span className="login-logo-text"></span>
         </div>
-
         <form className="login-form" onSubmit={handleSubmit}>
           <div className="login-field">
-            <label htmlFor="loginPhone">Phone Number</label>
+            <label htmlFor="identifier">Phone Number or Email</label>
             <input
-              id="loginPhone"
-              name="loginPhone"
-              type="tel"
-              value={phoneNumber}
-              onChange={(e) => setPhoneNumber(e.target.value)}
+              id="identifier"
+              type="text"
+              value={identifier}
+              onChange={(e) => setIdentifier(e.target.value)}
               required
             />
           </div>
-
           <div className="login-field">
-            <label htmlFor="loginPassword">Password:</label>
+            <label htmlFor="password">Password</label>
             <input
-              id="loginPassword"
-              name="loginPassword"
+              id="password"
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
             />
           </div>
-
-          <div className="login-field login-role-field">
-            <span className="login-role-label">Role</span>
-            <div className="login-role-options">
-              <label className="login-radio-option">
-                <input
-                  type="radio"
-                  name="role"
-                  value="supervisor"
-                  checked={role === "supervisor"}
-                  onChange={() => setRole("supervisor")}
-                />
-                <span>Supervisor</span>
-              </label>
-
-              <label className="login-radio-option">
-                <input
-                  type="radio"
-                  name="role"
-                  value="admin"
-                  checked={role === "admin"}
-                  onChange={() => setRole("admin")}
-                />
-                <span>Admin</span>
-              </label>
-            </div>
-          </div>
-
           {error && (
-            <p
-              style={{
-                marginTop: "8px",
-                color: "#dc2626",
-                fontSize: "0.85rem",
-              }}
-            >
-              {error}
-            </p>
+            <div style={{ color: "#dc2626", marginBottom: 8 }}>{error}</div>
           )}
-
           <button
             type="submit"
             className="login-submit-btn"

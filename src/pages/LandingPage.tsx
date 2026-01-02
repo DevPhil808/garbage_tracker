@@ -2,16 +2,12 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./LandingPage.css";
 
-const logoSrc = "/public/images/logo1.png";
-const heroSrc = "/images/hero.jpg";
+import logoSrc from "../assets/logo1.png";
+import heroSrc from "../assets/hero.jpg";
 
-const ICON_COMPANY_MANAGEMENT = "/public/images/corporate-building.png";
-const ICON_SUPERVISOR_TOOLS = "/public/images/supervisor.png";
-const ICON_COLLECTOR_TRACKING = "/public/images/tracking.png";
-
-const ICON_COMPANY_REGISTRATION = "/images/icon-company-registration.png";
-const ICON_TASK_ASSIGNMENT = "/images/icon-task-assignment.png";
-const ICON_COMPLAINT_MANAGEMENT = "/images/icon-complaint-management.png";
+import ICON_COMPANY_MANAGEMENT from "../assets/corporate-building.png";
+import ICON_SUPERVISOR_TOOLS from "../assets/supervisor.png";
+import ICON_COLLECTOR_TRACKING from "../assets/tracking.png";
 
 const LandingPage: React.FC = () => {
   const navigate = useNavigate();
@@ -60,7 +56,6 @@ const LandingPage: React.FC = () => {
                 A modern platform that connects waste companies, supervisors and
                 collectors with structured workflows and real-time tracking.
               </h1>
-              <p className="lp-hero-subtitle"></p>
 
               <div className="lp-hero-buttons">
                 <button
@@ -148,8 +143,9 @@ const LandingPage: React.FC = () => {
             <div className="lp-capabilities-grid">
               <div className="lp-capability-card">
                 <div className="lp-capability-icon">
+                  {/* ❌ placeholder for missing company registration icon */}
                   <img
-                    src={ICON_COMPANY_REGISTRATION}
+                    src=""
                     alt="Company registration and verification"
                     className="lp-capability-icon-img"
                   />
@@ -165,8 +161,9 @@ const LandingPage: React.FC = () => {
 
               <div className="lp-capability-card">
                 <div className="lp-capability-icon">
+                  {/* ❌ placeholder for missing task assignment icon */}
                   <img
-                    src={ICON_TASK_ASSIGNMENT}
+                    src=""
                     alt="Task assignment engine"
                     className="lp-capability-icon-img"
                   />
@@ -180,8 +177,9 @@ const LandingPage: React.FC = () => {
 
               <div className="lp-capability-card">
                 <div className="lp-capability-icon">
+                  {/* ❌ placeholder for missing complaint management icon */}
                   <img
-                    src={ICON_COMPLAINT_MANAGEMENT}
+                    src=""
                     alt="Complaint management"
                     className="lp-capability-icon-img"
                   />
@@ -196,60 +194,29 @@ const LandingPage: React.FC = () => {
           </section>
         </main>
 
+        {/* ✅ Footer Section */}
         <footer className="lp-footer">
-          <div className="lp-footer-columns">
-            <div className="lp-footer-column">
-              <h4 className="lp-footer-heading">Product</h4>
-              <ul className="lp-footer-list">
-                <li>Employee database</li>
-                <li>Payroll</li>
-                <li>Absences</li>
-                <li>Time tracking</li>
-                <li>Shift planner</li>
-                <li>Recruiting</li>
-              </ul>
+          <div className="lp-footer-content">
+            <div className="lp-footer-left">
+              <img
+                src={logoSrc}
+                alt="Borla Tracker logo"
+                className="lp-footer-logo"
+              />
+              <span className="lp-footer-text">
+                © {new Date().getFullYear()} Borla Tracker. All rights reserved.
+              </span>
             </div>
-
-            <div className="lp-footer-column">
-              <h4 className="lp-footer-heading">Information</h4>
-              <ul className="lp-footer-list">
-                <li>FAQ</li>
-                <li>Blog</li>
-                <li>Support</li>
-              </ul>
-            </div>
-
-            <div className="lp-footer-column">
-              <h4 className="lp-footer-heading">Company</h4>
-              <ul className="lp-footer-list">
-                <li>About us</li>
-                <li>Careers</li>
-                <li>Contact us</li>
-                <li>Lift Media</li>
-              </ul>
-            </div>
-
-            <div className="lp-footer-column lp-footer-subscribe">
-              <h4 className="lp-footer-heading">Subscribe</h4>
-              <form
-                className="lp-subscribe-form"
-                onSubmit={(e) => e.preventDefault()}
-              >
-                <input
-                  type="email"
-                  placeholder="Email address"
-                  className="lp-subscribe-input"
-                  required
-                />
-                <button type="submit" className="lp-subscribe-button">
-                  ➡
-                </button>
-              </form>
-              <p className="lp-subscribe-text">
-                Hello, we are Lift Media. Our goal is to translate the positive
-                effects from revolutionizing how companies engage with their
-                clients &amp; their team.
-              </p>
+            <div className="lp-footer-right">
+              <a href="/about" className="lp-footer-link">
+                About
+              </a>
+              <a href="/contact" className="lp-footer-link">
+                Contact
+              </a>
+              <a href="/privacy" className="lp-footer-link">
+                Privacy Policy
+              </a>
             </div>
           </div>
         </footer>

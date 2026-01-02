@@ -155,6 +155,14 @@ const SupervisorCollectors: React.FC = () => {
             >
               Collectors
             </button>
+
+            <button
+              type="button"
+              className="sd-nav-item"
+              onClick={() => navigate("/company/profile")}
+            >
+              Company Profile
+            </button>
             <button type="button" className="sc-nav-item">
               Settings
             </button>

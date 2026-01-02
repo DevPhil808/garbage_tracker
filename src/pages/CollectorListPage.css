@@ -1,0 +1,284 @@
+.collector-list-container {
+
+  max-width: 1200px;
+
+  margin: 3rem auto;
+
+  padding: 0 1.5rem;
+
+  font-family: Arial, sans-serif;
+
+}
+
+
+
+.list-header {
+
+  margin-bottom: 2rem;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  border-bottom: 2px solid #eee;
+
+  padding-bottom: 1rem;
+
+}
+
+
+
+.list-header h1 {
+
+  font-size: 2rem;
+
+  color: #333;
+
+}
+
+
+
+/* Status Messages */
+
+.status-message {
+
+  padding: 1rem;
+
+  border-radius: 8px;
+
+  text-align: center;
+
+  font-weight: 600;
+
+  margin-top: 1.5rem;
+
+}
+
+
+
+.status-message.loading {
+
+  background: #f0f8ff;
+
+  color: #007bff;
+
+}
+
+
+
+.status-message.error {
+
+  background: #fdd;
+
+  color: #d9534f;
+
+}
+
+
+
+.status-message.info {
+
+  background: #fff3cd;
+
+  color: #856404;
+
+}
+
+
+
+/* Grid Layout for Cards */
+
+.collector-cards-grid {
+
+  display: grid;
+
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+
+  gap: 20px;
+
+}
+
+
+
+/* Individual Card Styling */
+
+.collector-card {
+
+  background: #fff;
+
+  border-radius: 12px;
+
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+
+  padding: 20px;
+
+  border-left: 5px solid transparent;
+
+  transition: transform 0.2s, box-shadow 0.2s;
+
+}
+
+
+
+.collector-card.active {
+
+  border-left-color: #28a745; /* Green for active */
+
+}
+
+
+
+.collector-card.inactive {
+
+  border-left-color: #ffc107; /* Yellow for inactive */
+
+  opacity: 0.85;
+
+}
+
+
+
+.collector-card:hover {
+
+  transform: translateY(-3px);
+
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+
+}
+
+
+
+.card-header {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  margin-bottom: 10px;
+
+}
+
+
+
+.card-header h3 {
+
+  font-size: 1.25rem;
+
+  margin: 0;
+
+  color: #007bff;
+
+}
+
+
+
+.status-tag {
+
+  padding: 4px 10px;
+
+  border-radius: 20px;
+
+  font-size: 0.8rem;
+
+  font-weight: 700;
+
+  color: white;
+
+}
+
+
+
+.status-tag.active {
+
+  background: #28a745;
+
+}
+
+
+
+.status-tag.inactive {
+
+  background: #6c757d;
+
+}
+
+
+
+.card-details p {
+
+  margin: 5px 0;
+
+  font-size: 0.95rem;
+
+  color: #555;
+
+}
+
+
+
+/* Actions Section */
+
+.card-actions {
+
+  margin-top: 15px;
+
+  padding-top: 15px;
+
+  border-top: 1px dashed #eee;
+
+  display: flex;
+
+  gap: 10px;
+
+}
+
+
+
+.action-btn {
+
+  padding: 8px 15px;
+
+  border: none;
+
+  border-radius: 6px;
+
+  cursor: pointer;
+
+  font-weight: 600;
+
+  transition: background 0.3s;
+
+}
+
+
+
+.toggle-btn {
+
+  background: #17a2b8; /* Info blue */
+
+  color: white;
+
+}
+
+
+
+.toggle-btn:hover {
+
+  background: #138496;
+
+}
+
+
+
+.detail-btn {
+
+  background: #f8f9fa; /* Light background */
+
+  color: #333;
+
+  border: 1px solid;
+}

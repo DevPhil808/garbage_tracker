@@ -1,9 +1,10 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./SupervisorDashboard.css";
+import { logout } from "../services/authService";
 
-const logoSrc = "/public/images/logo1.png";
-const bellIconSrc = "/public/images/bell.svg";
+import logoSrc from "../assets/logo1.png";
+import bellIconSrc from "../assets/bell.svg";
 
 const SupervisorDashboard: React.FC = () => {
   const navigate = useNavigate();
@@ -44,11 +45,7 @@ const SupervisorDashboard: React.FC = () => {
             </button>
             <span className="sd-header-text">ID: 12444</span>
             <span className="sd-header-text">Supervisor: John Smith</span>
-            <button
-              type="button"
-              className="sd-logout-button"
-              onClick={() => navigate("/login")}
-            >
+            <button type="button" className="sd-logout-button" onClick={logout}>
               Logout
             </button>
           </div>
@@ -77,8 +74,57 @@ const SupervisorDashboard: React.FC = () => {
             >
               Collectors
             </button>
+            <button
+              type="button"
+              className="sd-nav-item"
+              onClick={() => navigate("/supervisor/register/supervisor")}
+            >
+              Register Supervisor
+            </button>
+            <button
+              type="button"
+              className="sd-nav-item"
+              onClick={() => navigate("/supervisor/register/collector")}
+            >
+              Register Collector
+            </button>
+            <button
+              type="button"
+              className="sd-nav-item"
+              onClick={() => navigate("/company/profile")}
+            >
+              Company Profile
+            </button>
+            <button
+              type="button"
+              className="sd-nav-item"
+              onClick={() => navigate("/assign/collector")}
+            >
+              Assign Collector
+            </button>
+            <button
+              type="button"
+              className="sd-nav-item"
+              onClick={() => navigate("/supervisors/list")}
+            >
+              Supervisors List
+            </button>
+            <button
+              type="button"
+              className="sd-nav-item"
+              onClick={() => navigate("/collectors/list")}
+            >
+              Collectors List
+            </button>
             <button type="button" className="sd-nav-item">
               Settings
+            </button>
+            <button
+              type="button"
+              className="sd-nav-item"
+              onClick={() => navigate("/collectors/approval")}
+            >
+              Collector Approvals
             </button>
           </aside>
 
