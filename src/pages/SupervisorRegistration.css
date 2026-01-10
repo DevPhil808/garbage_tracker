@@ -7,10 +7,22 @@
   background-color: #fff;
 }
 
+/* ✅ Logo styling */
+.registration-logo-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.registration-logo {
+  height: 50px; /* ✅ reasonable size */
+  width: auto;
+}
+
 .registration-title {
   text-align: center;
-  color: #000;           /* ✅ changed to black */
-  font-size: 1.5rem;     /* ✅ smaller size */
+  color: #000;
+  font-size: 1.5rem;
   font-weight: 600;
   margin-bottom: 1.5rem;
 }
@@ -28,6 +40,8 @@
   font-size: 1rem;
   outline: none;
   transition: border-color 0.2s;
+  background-color: #fff;
+  color: #000;
 }
 
 .registration-form input:focus {
@@ -36,7 +50,7 @@
 
 .registration-button {
   padding: 0.75rem;
-  background-color:  #16a34a;
+  background-color: #16a34a;
   color: white;
   border: none;
   border-radius: 6px;
@@ -45,9 +59,26 @@
   transition: background-color 0.2s;
 }
 
+.registration-button:hover {
+  background-color: #15803d; /* ✅ darker hover */
+}
+
 .registration-button:disabled {
-  background-color: #6b7280; /* gray when disabled */
+  background-color: #6b7280;
   cursor: not-allowed;
+}
+
+.registration-photo-preview {
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0;
+}
+
+.registration-photo-img {
+  height: 80px;
+  width: auto;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
 }
 
 .registration-error {

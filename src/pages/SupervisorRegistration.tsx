@@ -57,7 +57,6 @@ const SupervisorRegistration: React.FC = () => {
           team_size: formData.team_size
             ? parseInt(formData.team_size, 10)
             : undefined,
-          // ✅ Use provided photo_url or fallback to default avatar
           photo_url: formData.photo_url || logoSrc,
         }),
       });
@@ -95,7 +94,17 @@ const SupervisorRegistration: React.FC = () => {
 
   return (
     <div className="registration-card">
+      {/* ✅ Project Logo at the top */}
+      <div className="registration-logo-wrapper">
+        <img
+          src={logoSrc}
+          alt="Borla Tracker logo"
+          className="registration-logo"
+        />
+      </div>
+
       <h1 className="registration-title">Register Supervisor</h1>
+
       <form onSubmit={handleSubmit} className="registration-form">
         <input
           type="text"

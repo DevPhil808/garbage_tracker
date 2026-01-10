@@ -5,7 +5,7 @@ import "./CompanyRegistration.css";
 const COMPANY_API_URL =
   "https://postumbonal-monatomic-cecelia.ngrok-free.dev/api/company/register/";
 
-const logoSrc = "/public/images/logo1.png";
+import logoSrc from "../assets/logo1.png";
 
 const DAYS_OF_WEEK = [
   "Monday",

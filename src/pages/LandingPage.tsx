@@ -9,6 +9,10 @@ import ICON_COMPANY_MANAGEMENT from "../assets/corporate-building.png";
 import ICON_SUPERVISOR_TOOLS from "../assets/supervisor.png";
 import ICON_COLLECTOR_TRACKING from "../assets/tracking.png";
 
+import ICON_COMPANY_REGISTRATION from "../assets/company-registration.png";
+import ICON_TASK_ASSIGNMENT from "../assets/task-assignment.png";
+import ICON_COMPLAINT_MANAGEMENT from "../assets/complaint-management.png";
+
 const LandingPage: React.FC = () => {
   const navigate = useNavigate();
 
@@ -32,6 +36,7 @@ const LandingPage: React.FC = () => {
                 alt="Borla Tracker logo"
                 className="lp-logo-img"
               />
+              <span className="lp-logo-text"></span>
             </div>
 
             <div className="lp-nav-right">
@@ -55,6 +60,10 @@ const LandingPage: React.FC = () => {
                 A modern platform that connects waste companies, supervisors and
                 collectors with structured workflows and real-time tracking.
               </h1>
+              <p className="lp-hero-subtitle">
+                Streamline operations, empower supervisors, and track collectors
+                with ease.
+              </p>
 
               <div className="lp-hero-buttons">
                 <button
@@ -85,7 +94,7 @@ const LandingPage: React.FC = () => {
           </section>
         </header>
 
-        {/* Main */}
+        {/* Features */}
         <main>
           <section className="lp-feature-section">
             <div className="lp-feature-card">
@@ -136,6 +145,7 @@ const LandingPage: React.FC = () => {
             </div>
           </section>
 
+          {/* Platform Capabilities */}
           <section className="lp-platform-section">
             <h2 className="lp-platform-heading">What the Platform Can Do</h2>
 
@@ -143,7 +153,7 @@ const LandingPage: React.FC = () => {
               <div className="lp-capability-card">
                 <div className="lp-capability-icon">
                   <img
-                    src=""
+                    src={ICON_COMPANY_REGISTRATION}
                     alt="Company registration and verification"
                     className="lp-capability-icon-img"
                   />
@@ -160,7 +170,7 @@ const LandingPage: React.FC = () => {
               <div className="lp-capability-card">
                 <div className="lp-capability-icon">
                   <img
-                    src=""
+                    src={ICON_TASK_ASSIGNMENT}
                     alt="Task assignment engine"
                     className="lp-capability-icon-img"
                   />
@@ -175,7 +185,7 @@ const LandingPage: React.FC = () => {
               <div className="lp-capability-card">
                 <div className="lp-capability-icon">
                   <img
-                    src=""
+                    src={ICON_COMPLAINT_MANAGEMENT}
                     alt="Complaint management"
                     className="lp-capability-icon-img"
                   />
@@ -192,13 +202,13 @@ const LandingPage: React.FC = () => {
 
         {/* Footer */}
         <footer className="lp-footer">
-          <div className="lp-footer-grid">
+          <div className="lp-footer-columns">
             <div className="lp-footer-column">
               <h4 className="lp-footer-heading">Product</h4>
               <ul className="lp-footer-list">
                 <li>Employee database</li>
                 <li>Payroll</li>
-                <li>Absencies</li>
+                <li>Absences</li>
                 <li>Time tracking</li>
                 <li>Shift planner</li>
                 <li>Recruiting</li>
@@ -224,34 +234,27 @@ const LandingPage: React.FC = () => {
               </ul>
             </div>
 
-            <div className="lp-footer-column">
+            <div className="lp-footer-column lp-footer-subscribe">
               <h4 className="lp-footer-heading">Subscribe</h4>
-              <form className="lp-footer-subscribe">
+              <form
+                className="lp-subscribe-form"
+                onSubmit={(e) => e.preventDefault()}
+              >
                 <input
                   type="email"
                   placeholder="Email address"
-                  className="lp-footer-input"
+                  className="lp-subscribe-input"
+                  required
                 />
-                <button type="submit" className="lp-footer-button">
+                <button type="submit" className="lp-subscribe-button">
                   Subscribe
                 </button>
               </form>
-              <p className="lp-footer-description">
+              <p className="lp-subscribe-text">
                 Hello, we are Borla Tracker. Our goal is to revolutionize how
-                waste companies engage with their clients and teams.
+                companies engage with their clients &amp; their team.
               </p>
             </div>
-          </div>
-
-          <div className="lp-footer-bottom">
-            <img
-              src={logoSrc}
-              alt="Borla Tracker logo"
-              className="lp-footer-logo"
-            />
-            <span className="lp-footer-text">
-              © {new Date().getFullYear()} Borla Tracker. All rights reserved.
-            </span>
           </div>
         </footer>
       </div>
